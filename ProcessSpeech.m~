@@ -42,7 +42,7 @@ unvoiced_indicator=voicing_prob<.5;
 f0Estimates_remove_unvoiced(unvoiced_indicator)=nan;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% plot the spectrogram
-h=figure;
+figure;
 subplot(313)
 timeVector = (0:nSegments-1)*segmentShift+segmentTime/2;
 window = gausswin(segmentLength);
@@ -51,27 +51,24 @@ nDft = 2048;
 [stft, stftFreqVector, stftTimeVector] = ...
     spectrogram(cleanspeech, window, nOverlap, nDft, samplingFreq);
 powerSpectrum = abs(stft).^2;
+
+%% plot the results
 maxDynamicRange = 60; % dB
 imagesc(stftTimeVector, stftFreqVector, ...
     10*log10(dynamicRangeLimiting(powerSpectrum, maxDynamicRange)));
 set(gca,'YDir','normal')
 hold on
 plot(timeVector,f0Estimates_remove_unvoiced*samplingFreq, 'r-', 'linewidth',2);
-xlim([min(timeVector),max(timeVector)])
 ylim([0,500]);
 ylabel('Frequency [Hz]');
 xlabel('Time [s]');
 
 %% plot the order estimates
 subplot(312)
-plot(timeVector,order,'r.')
-xlim([min(timeVector),max(timeVector)])
-ylabel('Order');
+plot(timeVector,order)
+
 %% plot the voicing probability
-subplot(311)
-plot(timeVector,voicing_prob,'r-')
-xlim([min(timeVector),max(timeVector)])
-ylabel('Voicing Probability');
+subplot(313)
 
 
 
