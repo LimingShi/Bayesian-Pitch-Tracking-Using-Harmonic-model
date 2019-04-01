@@ -6,7 +6,7 @@ addpath ./util/
 [cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
 
 SNR=0;
-noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),0);
+noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
 speechSignal=cleanspeech+noise;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % normalization step
