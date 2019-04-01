@@ -41,15 +41,33 @@ f0Estimates_remove_unvoiced=f0Estimates;
 unvoiced_indicator=voicing_prob<.5;
 f0Estimates_remove_unvoiced(unvoiced_indicator)=nan;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% plot the spectrogram
-h=figure;
-subplot(313)
+%% plot the noisy spectrogram
+h=figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(414)
 timeVector = (0:nSegments-1)*segmentShift+segmentTime/2;
 window = gausswin(segmentLength);
-nOverlap = round(3*segmentLength/4);
+nOverlap = round((1-nShift/segmentLength)*segmentLength);
 nDft = 2048;
 [stft, stftFreqVector, stftTimeVector] = ...
-    spectrogram(cleanspeech, window, nOverlap, nDft, samplingFreq);
+    spectrogram(speechSignal_padded, window, nOverlap, nDft, samplingFreq);
+powerSpectrum = abs(stft).^2;
+maxDynamicRange = 60; % dB
+imagesc(stftTimeVector, stftFreqVector, ...
+    10*log10(dynamicRangeLimiting(powerSpectrum, maxDynamicRange)));
+set(gca,'YDir','normal')
+xlim([min(timeVector),max(timeVector)])
+ylim([0,2000]);
+ylabel('Frequency [Hz]');
+xlabel('Time [s]');
+
+%% plot the estimated pitch track on top of the clean spectrogram
+subplot(413)
+timeVector = (0:nSegments-1)*segmentShift+segmentTime/2;
+window = gausswin(segmentLength);
+nOverlap = round((1-nShift/segmentLength)*segmentLength);
+nDft = 2048;
+[stft, stftFreqVector, stftTimeVector] = ...
+    spectrogram([zeros(segmentLength/2,1);cleanspeech], window, nOverlap, nDft, samplingFreq);
 powerSpectrum = abs(stft).^2;
 maxDynamicRange = 60; % dB
 imagesc(stftTimeVector, stftFreqVector, ...
@@ -60,15 +78,14 @@ plot(timeVector,f0Estimates_remove_unvoiced*samplingFreq, 'r-', 'linewidth',2);
 xlim([min(timeVector),max(timeVector)])
 ylim([0,500]);
 ylabel('Frequency [Hz]');
-xlabel('Time [s]');
 
 %% plot the order estimates
-subplot(312)
+subplot(412)
 plot(timeVector,order,'r.')
 xlim([min(timeVector),max(timeVector)])
 ylabel('Order');
 %% plot the voicing probability
-subplot(311)
+subplot(411)
 plot(timeVector,voicing_prob,'r-')
 xlim([min(timeVector),max(timeVector)])
 ylabel('Voicing Probability');

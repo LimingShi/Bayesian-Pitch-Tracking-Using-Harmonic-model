@@ -154,7 +154,7 @@ classdef BayesianfastF0NLS< handle
             
                    
             for jj=1:obj.L
-                 obj.B(jj,:)=log(normpdf(jj,[1:obj.L],1));
+                 obj.B(jj,:)=(normpdf(jj,[1:obj.L],1));
             end
             
             
