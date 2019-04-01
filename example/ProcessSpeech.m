@@ -1,7 +1,7 @@
 clear
 clc
 close all;
-addpath ./util/
+addpath ../util/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Read data from wave file
 [cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
