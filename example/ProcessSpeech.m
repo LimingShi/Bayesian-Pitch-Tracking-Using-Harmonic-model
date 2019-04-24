@@ -4,16 +4,23 @@ close all;
 addpath ../util/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Read data from wave file
-[cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
+samplingFreq=8000;
+[cleanspeech, fs] = audioread(['f1nw0000.wav']);
+cleanspeech=resample(cleanspeech,samplingFreq,fs);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Add noise to the data
-SNR=0;
-noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
+SNR=5;
+load babble.mat;
+noise_sig=resample(babble,samplingFreq,19980);
+start_point=randi(length(noise_sig)-length(cleanspeech)-100);
+noise_sig=noise_sig(start_point:start_point+length(cleanspeech)-1);
+noise=addnoise_strict_snr(cleanspeech,noise_sig,SNR);
 speechSignal=cleanspeech+noise;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Data normalization step
+speechSignal=speechSignal/max(abs(speechSignal));
 sumE = sqrt(speechSignal'*speechSignal/length(speechSignal));
-scale = sqrt(3.1623e-5)/sumE; % scale to -45-dB loudness level
+scale = sqrt(1)/sumE; % scale to 0-dB loudness level
 speechSignal=speechSignal*scale;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initiate the estimator
@@ -25,7 +32,7 @@ nShift = round(segmentShift*samplingFreq); % samples
 nSegments = floor((nData+segmentLength/2-segmentLength)/nShift)+1;
 f0Bounds = [70, 400]/samplingFreq; % cycles/sample
 maxNoHarmonics = 10;
-f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,2/samplingFreq,.7);
+f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,5/samplingFreq,.7);
 speechSignal_padded=[zeros(segmentLength/2,1);speechSignal];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% do the analysis

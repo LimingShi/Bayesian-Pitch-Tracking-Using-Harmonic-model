@@ -1,19 +1,25 @@
 clear
 clc
 close all;
-addpath ./util/
+addpath ../util/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Read data from wave file
-[cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
+[cleanspeech, fs] = audioread(['wb2ext.wav']);
+cleanspeech=resample(cleanspeech,8000,fs);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Add noise to the data
-SNR=0;
-noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
+SNR=5;
+load babble.mat;
+noise_sig=resample(babble,samplingFreq,19980);
+start_point=randi(length(noise_sig)-length(cleanspeech)-100);
+noise_sig=noise_sig(start_point:start_point+length(cleanspeech)-1);
+noise=addnoise_strict_snr(cleanspeech,noise_sig,SNR);
 speechSignal=cleanspeech+noise;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Data normalization step
+speechSignal=speechSignal/max(abs(speechSignal));
 sumE = sqrt(speechSignal'*speechSignal/length(speechSignal));
-scale = sqrt(3.1623e-5)/sumE; % scale to -45-dB loudness level
+scale = sqrt(1)/sumE; % scale to 0-dB loudness level
 speechSignal=speechSignal*scale;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initiate the estimator
@@ -25,7 +31,7 @@ nShift = round(segmentShift*samplingFreq); % samples
 nSegments = floor((nData+segmentLength/2-segmentLength)/nShift)+1;
 f0Bounds = [70, 400]/samplingFreq; % cycles/sample
 maxNoHarmonics = 10;
-f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,2/samplingFreq,.7);
+f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,5/samplingFreq,.7);
 speechSignal_padded=[zeros(segmentLength/2,1);speechSignal];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% do the analysis
@@ -41,34 +47,54 @@ f0Estimates_remove_unvoiced=f0Estimates;
 unvoiced_indicator=voicing_prob<.5;
 f0Estimates_remove_unvoiced(unvoiced_indicator)=nan;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% plot the spectrogram
-figure;
-subplot(313)
+%% plot the noisy spectrogram
+h=figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(414)
 timeVector = (0:nSegments-1)*segmentShift+segmentTime/2;
 window = gausswin(segmentLength);
-nOverlap = round(3*segmentLength/4);
+nOverlap = round((1-nShift/segmentLength)*segmentLength);
 nDft = 2048;
 [stft, stftFreqVector, stftTimeVector] = ...
-    spectrogram(cleanspeech, window, nOverlap, nDft, samplingFreq);
+    spectrogram(speechSignal_padded, window, nOverlap, nDft, samplingFreq);
 powerSpectrum = abs(stft).^2;
+maxDynamicRange = 60; % dB
+imagesc(stftTimeVector, stftFreqVector, ...
+    10*log10(dynamicRangeLimiting(powerSpectrum, maxDynamicRange)));
+set(gca,'YDir','normal')
+xlim([min(timeVector),max(timeVector)])
+ylim([0,2000]);
+ylabel('Frequency [Hz]');
+xlabel('Time [s]');
 
-%% plot the results
+%% plot the estimated pitch track on top of the clean spectrogram
+subplot(413)
+timeVector = (0:nSegments-1)*segmentShift+segmentTime/2;
+window = gausswin(segmentLength);
+nOverlap = round((1-nShift/segmentLength)*segmentLength);
+nDft = 2048;
+[stft, stftFreqVector, stftTimeVector] = ...
+    spectrogram([zeros(segmentLength/2,1);cleanspeech], window, nOverlap, nDft, samplingFreq);
+powerSpectrum = abs(stft).^2;
 maxDynamicRange = 60; % dB
 imagesc(stftTimeVector, stftFreqVector, ...
     10*log10(dynamicRangeLimiting(powerSpectrum, maxDynamicRange)));
 set(gca,'YDir','normal')
 hold on
 plot(timeVector,f0Estimates_remove_unvoiced*samplingFreq, 'r-', 'linewidth',2);
+xlim([min(timeVector),max(timeVector)])
 ylim([0,500]);
 ylabel('Frequency [Hz]');
-xlabel('Time [s]');
 
 %% plot the order estimates
-subplot(312)
-plot(timeVector,order)
-
+subplot(412)
+plot(timeVector,order,'r.')
+xlim([min(timeVector),max(timeVector)])
+ylabel('Order');
 %% plot the voicing probability
-subplot(313)
+subplot(411)
+plot(timeVector,voicing_prob,'r-')
+xlim([min(timeVector),max(timeVector)])
+ylabel('Voicing Probability');
 
 
 

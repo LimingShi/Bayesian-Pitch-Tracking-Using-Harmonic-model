@@ -34,7 +34,7 @@ classdef BayesianfastF0NLS< handle
         scaled_alpha_buffer2
         unvoicing_scaled_alpha_buffer
         logModelPrior;
-        varSpeech=5e-3;
+        varSpeech=1000;
         B
         C
         norml_factor=0;
