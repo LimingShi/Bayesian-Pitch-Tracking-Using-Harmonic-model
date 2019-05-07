@@ -55,6 +55,7 @@ classdef BayesianfastF0NLS< handle
     end
 
     methods
+
         
         function obj = BayesianfastF0NLS(N, L, pitchBounds, A_var,voicingProb,varargin)
             switch nargin
@@ -319,7 +320,7 @@ classdef BayesianfastF0NLS< handle
                 if unvoicing_scaled_alpha < log(0.5)
                     obj.scaled_alpha_buffer2=exp(scaled_alpha-log_sumsum_exp_ls(scaled_alpha));
                 else 
-                    estimatedOrder=nan;
+%                     estimatedOrder=nan;
                 end
                 obj.scaled_alpha_buffer=exp(scaled_alpha);
                 obj.unvoicing_scaled_alpha_buffer=exp(unvoicing_scaled_alpha);
@@ -339,6 +340,8 @@ classdef BayesianfastF0NLS< handle
                 varargout{3} = 1-exp(unvoicing_scaled_alpha);
             end
             
+        end
+        function obj=destroy(obj)
         end
     end
 end
