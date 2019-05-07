@@ -1,12 +1,12 @@
 clear
 clc
 close all;
-addpath ./util/
+addpath ../util/
 
 [cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
 
 SNR=0;
-noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),0);
+noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
 speechSignal=cleanspeech+noise;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % normalization step
@@ -26,7 +26,7 @@ nSegments = floor((nData+segmentLength/2-segmentLength)/nShift)+1;
 f0Bounds = [70, 400]/samplingFreq; % cycles/sample
 maxNoHarmonics = 10;
 f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,2/samplingFreq,.7);
- speechSignal_padded=[zeros(segmentLength/2,1);speechSignal];
+speechSignal_padded=[zeros(segmentLength/2,1);speechSignal];
 % do the analysis
 idx = 1:segmentLength;
 f0Estimates = nan(1,nSegments); % cycles/sample
@@ -36,7 +36,9 @@ tic
 for ii = 1:nSegments
 %     
     speechSegment = speechSignal_padded(idx);
-    [f0Estimates(ii),order(ii),voicing_prob(ii)]=f0Estimator.estimate(speechSegment,1);
+%     f0Estimator.estimate(speechSegment,flag) flag=0 for disabling the
+%     prewhitening,flag=1 for enabling the prewhitening
+    [f0Estimates(ii),order(ii),voicing_prob(ii)]=f0Estimator.estimate(speechSegment,0);
     
     idx = idx + nShift;
 end

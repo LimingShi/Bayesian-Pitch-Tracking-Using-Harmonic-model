@@ -1,5 +1,17 @@
 classdef BayesianfastF0NLS< handle
 
+%     usuage
+
+% obj= BayesianfastF0NLS(N, L, pitchBounds, A_var,voicingProb,varargin)
+%  N is the frame length 
+%  L is the maximum allowed harmonic order
+%  pitchBounds denotes the pitch range e.g.,[f_min/fs, f_max/fs], where fs is
+%  the sampling frequency
+%  A_var denotes the frequncy transition variance.
+%  voicingProb denotes the initial voicing probability
+    
+    
+    
     % Can only be set in the constructor
     properties (SetAccess=immutable) 
         N
@@ -39,11 +51,34 @@ classdef BayesianfastF0NLS< handle
         C
         norml_factor=0;
         cnt=1;
+        prew_state
     end
 
     methods
         
         function obj = BayesianfastF0NLS(N, L, pitchBounds, A_var,voicingProb,varargin)
+            switch nargin
+                case 0
+                     N=0.03*16000;
+                     L=10;
+                     pitchBounds=[50/16000,400/16000];
+                     A_var=[2/16000];
+                     voicingProb=0.7;                    
+                case 1
+                     L=10;
+                     pitchBounds=[50/16000,400/16000];
+                     A_var=[2/16000];
+                     voicingProb=0.7;
+                case 2
+                    pitchBounds=[50/16000,400/16000];
+                     A_var=[2/16000];
+                     voicingProb=0.7;
+                case 3
+                     A_var=[2/16000];
+                     voicingProb=0.7;
+                case 4
+                     voicingProb=0.7;               
+            end
 
             % validate input 
             if length(varargin) >= 1
@@ -60,7 +95,7 @@ classdef BayesianfastF0NLS< handle
                     error('Argument 5 is not a scalar')
                 end
             else
-                obj.F = 5*N*L;
+                obj.F = 2^14;
             end
             obj.defaultRefinementTol = 1/obj.F;
             
@@ -154,13 +189,13 @@ classdef BayesianfastF0NLS< handle
             
                    
             for jj=1:obj.L
-                 obj.B(jj,:)=log(normpdf(jj,[1:obj.L],1));
+                 obj.B(jj,:)=normpdf(jj,[1:obj.L],1);
             end
             
             
             obj.B=obj.B./repmat(sum(obj.B,2),1,obj.L);
             
-            obj.C=[.9 .1;.4,.6];
+            obj.C=[.7 .3;.4,.6];
             
             obj.scaled_alpha_buffer2=1/obj.L/nPitches*ones(nPitches,obj.L);
             
@@ -189,7 +224,7 @@ classdef BayesianfastF0NLS< handle
             
         end
         
-        function varargout = estimate(obj, x, flag,varargin)
+        function varargout = estimate(obj, x, flag,tinc,varargin)
             % Estimate fundamental frequency and order of the signal x
                 
             % validate input 
@@ -209,14 +244,24 @@ classdef BayesianfastF0NLS< handle
             else
                 obj.refinementTol = obj.defaultRefinementTol;
             end
-            % if the data consists of all zeros then return zero model 
-%             obj.norml_factor=obj.norml_factor+x'*x;
-%             sumE=sqrt(obj.norml_factor/obj.cnt/length(x));
-%             obj.cnt=obj.cnt+1;
-%             scale=sqrt(3.1623e-5)/sumE;
-%             if obj.cnt>=100
-%                 x=x*scale;
-%             end
+            if flag==1
+                spec_pow_all=(abs(fft(x,2048)).^2)';
+                if isempty(obj.prew_state)
+                    [psdouput,obj.prew_state]=estnoiseg_orig(spec_pow_all,tinc);
+                else
+                    [psdouput,obj.prew_state]=estnoiseg_orig(spec_pow_all,obj.prew_state);
+                end
+                mmse_covariance_all = (real(ifft(psdouput')));
+                mmse_lpc_all= levinson(mmse_covariance_all,30);
+                [xp] = filter(mmse_lpc_all,1,...
+                    x);
+                  x=xp/norm(xp)*norm(x);
+            end
+            
+            
+            
+            
+            % if the data consists of all zeros then return null model 
             if  x'*x/obj.N<1e-10
                 estimatedPitch = nan;
                 estimatedOrder = 0;
@@ -231,11 +276,6 @@ classdef BayesianfastF0NLS< handle
 %                   cod = costs*(1/(x'*x));
                 [~, pitchLogLikelihood] = ...
                     computePitchLogLikelihood(cod, obj.N, obj.gPriorParam);
-%                 for ii=1:10
-%                 lok(ii,:)=log(hypergeom([length(x)/2,1],(2*ii+3)/2,cod(ii,:))/(2*ii+1));
-%                 end
-%                 normparameter=log_sumsum_exp_ls(pitchLogLikelihood);
-%                 pitchLogLikelihood=pitchLogLikelihood-log_sumsum_exp_ls(pitchLogLikelihood);
                 null_modellike=1;
                 
                     %% added/modified by Liming Shi (implements the hidden markov chain)
@@ -248,19 +288,18 @@ classdef BayesianfastF0NLS< handle
                     log_scale=log_sumsum_exp_ls([[unvoicing_bar_alpha,-inf*ones(1,obj.L-1)];bar_alpha]);
                     scaled_alpha=bar_alpha-log_scale;
                     unvoicing_scaled_alpha=unvoicing_bar_alpha-log_scale;
-%                     log_scale=log_trapz_exp_ls(bar_alpha,1);
-%                     scaled_alpha=bar_alpha-log_scale-log(grid_width);    
+ 
                 else
                     inx=isnan(pitchLogLikelihood);
                     pitchLogLikelihood(inx)=-inf;
                     state_prior=obj.C(1,1)*obj.A'*obj.scaled_alpha_buffer*obj.B;
-%                     state_prior=state_prior+1/obj.L/length(obj.fullPitchGrid)*obj.C(2,1)*obj.unvoicing_scaled_alpha_buffer;
+
                     state_prior=state_prior+obj.scaled_alpha_buffer2*obj.C(2,1)*obj.unvoicing_scaled_alpha_buffer;
-%                     plot(state_prior);drawno2w;
+
                     bar_alpha=log(state_prior)+pitchLogLikelihood';
                     
                     temp=[1-obj.unvoicing_scaled_alpha_buffer;obj.unvoicing_scaled_alpha_buffer];
-%                     sum(sum(state_prior))+obj.C(:,2)'*temp
+
                     unvoicing_bar_alpha=log(obj.C(:,2)'*temp*null_modellike);
                     log_scale=log_sumsum_exp_ls([[unvoicing_bar_alpha,-inf*ones(1,obj.L-1)];bar_alpha]);
                     scaled_alpha=bar_alpha-log_scale;
