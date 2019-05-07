@@ -34,7 +34,7 @@ classdef BayesianfastF0NLS< handle
         scaled_alpha_buffer2
         unvoicing_scaled_alpha_buffer
         logModelPrior;
-        varSpeech=1000;
+        varSpeech=5e-3;
         B
         C
         norml_factor=0;
@@ -154,7 +154,7 @@ classdef BayesianfastF0NLS< handle
             
                    
             for jj=1:obj.L
-                 obj.B(jj,:)=(normpdf(jj,[1:obj.L],1));
+                 obj.B(jj,:)=log(normpdf(jj,[1:obj.L],1));
             end
             
             
