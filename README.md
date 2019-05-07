@@ -6,7 +6,7 @@ Shi L, Nielsen J K, Jensen J R, et al. Bayesian Pitch Tracking Based on the Harm
 IEEE/ACM Transactions on Audio, Speech, and Language Processing, submitted 2018.
 
 # How to run
-Run ProcessSpeech.m in the example folder in MATLAB
+Run run_white_example.m or run_colored_example.m in the example folder in MATLAB
 
 # Note
 This fast computation of the likelihood function is based on the fast pitch estimation method proposed in
