@@ -6,8 +6,9 @@ addpath ../util/
 [cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
 %% generate noisy data
 SNR=10;
-load factory2.mat
-noise_s=resample(factory2,samplingFreq,19980);
+load factoryNoise.mat
+factoryNoise=resample(factoryNoise,samplingFreq,16000);
+noise_s=factoryNoise;
 randstart=randi(length(noise_s)-length(cleanspeech)-100);
 noise_seg=noise_s(randstart:randstart+length(cleanspeech)-1);
 noise=addnoise_strict_snr(cleanspeech,noise_seg,SNR);
