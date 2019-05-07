@@ -2,7 +2,7 @@ clear
 clc
 close all;
 addpath ../util/
-
+%% read speech signals
 [cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
 %% generate noisy data
 SNR=0;
