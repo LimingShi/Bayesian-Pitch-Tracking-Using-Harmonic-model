@@ -2,7 +2,7 @@ clear
 clc
 close all;
 %% read speech signals
-[cleanspeech, samplingFreq] = audioread(['wb2ext.wav']);
+[cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);
 %% generate noisy data
 SNR=0;
 noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
