@@ -90,10 +90,10 @@ result.best_order=order_remove_unvoiced;
 if plot_flag==1
     figure;
     subplot(4,1,4)
-    plot([0:length(speechSignal_padded)-1]/samplingFreq,speechSignal_padded/max(abs(speechSignal_padded)));
+    plot([0:length(speechSignal_padded)-1]/samplingFreq,speechSignal_padded/max(a));
     xlim([0,(length(speechSignal_padded)-1)/samplingFreq])
     xlabel('Time [s]');
-    ylabel('Amplitude');
+     xlabel('Amplitude');
     subplot(4,1,3)    
 %   plot the spectrogram
     window = gausswin(segmentLength);
