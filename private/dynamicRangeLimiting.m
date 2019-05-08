@@ -2,8 +2,8 @@
 % Limit the dynamic range of nonnegative data
 % 
 %% Syntax:
-%# limitedNonnegativeData = ...
-%#     dynamicRangeLimiting(nonnegativeData, maxRangeDb)
+% limitedNonnegativeData = ...
+%     dynamicRangeLimiting(nonnegativeData, maxRangeDb)
 %
 %% Description:
 % Limit the dynamic range of nonnegative data. This is usefull for plotting

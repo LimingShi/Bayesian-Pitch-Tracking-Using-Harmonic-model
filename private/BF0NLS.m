@@ -1,4 +1,19 @@
 function result=BF0NLS(speechSignal,samplingFreq,plot_flag,prew_flag)
+% format of the input and output arguments
+% input:
+% input arguments --> as the names suggested
+% output:
+% result.tt         -->     time vector
+% result.ff         -->     Fundamental frequency estimates (when all the frames are considered as voiced)
+% result.oo         -->     order estimates  (when all the frames are considered as voiced)
+% result.vv         -->     voicing probability
+% result.best_ff    -->     Best fundamental frequency estimates (setting the F0=nan when voicing probability is less than .5)
+% result.best_order -->     Best harmonic order estimates (setting the order=nan when voicing probability is less than .5)
+
+% Written by Liming Shi, Aalborg 9000, Denmark
+% Email: ls@create.aau.dk
+
+
 if nargin<3
 %   do not use prewhitening in default, and do not plot
     plot_flag=0;
