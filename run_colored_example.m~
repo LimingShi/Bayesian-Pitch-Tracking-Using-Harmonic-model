@@ -5,8 +5,9 @@ close all;
 [cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);
 %% generate noisy data
 SNR=10;
-load factoryNoise.mat
-noise_s=resample(factoryNoise,samplingFreq,16000);
+load babble2.mat
+factoryNoise=resample(babble2,samplingFreq,19980);
+noise_s=factoryNoise;
 randstart=randi(length(noise_s)-length(cleanspeech)-100);
 noise_seg=noise_s(randstart:randstart+length(cleanspeech)-1);
 noise=addnoise_strict_snr(cleanspeech,noise_seg,SNR);
