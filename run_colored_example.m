@@ -4,7 +4,7 @@ close all;
 %% read speech signals
 [cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);
 %% generate noisy data
-SNR=5;
+SNR=0;
 load factoryNoise.mat
 noise_s=resample(factoryNoise,samplingFreq,16000);
 randstart=randi(length(noise_s)-length(cleanspeech)-100);

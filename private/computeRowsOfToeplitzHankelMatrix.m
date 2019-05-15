@@ -1,12 +1,15 @@
 function rowMatrix = computeRowsOfToeplitzHankelMatrix(rowNumber,...
         nColumns, crossCorrelationVectors, hankelMatrixIsAdded, dcIsIncluded)
-    if rowNumber == 1
-        toeplitzRows = crossCorrelationVectors(1:nColumns,:);
-    else
-        toeplitzRows = ...
-            [flip(crossCorrelationVectors(2:rowNumber,:),1);...
-            crossCorrelationVectors(1:nColumns-rowNumber+1,:)];
-    end
+%     if rowNumber == 1
+%         toeplitzRows = crossCorrelationVectors(1:nColumns,:);
+%     else
+%         toeplitzRows = ...
+%             [flip(crossCorrelationVectors(2:rowNumber,:),1);...
+%             crossCorrelationVectors(1:nColumns-rowNumber+1,:)];
+%     end
+% modified by Liming Shi for fast computation in MATLAB                    
+    toeplitzRows=crossCorrelationVectors(rowNumber:-1:1,:);
+    
     
     
     if dcIsIncluded && hankelMatrixIsAdded

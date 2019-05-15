@@ -2,7 +2,7 @@ clear
 clc
 close all;
 %% read speech signals
-[cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);
+[cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);cleanspeech=cleanspeech(:,1);
 %% generate noisy data
 SNR=0;
 noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
@@ -14,6 +14,7 @@ NoisySignal=cleanspeech+noise;
 plot_flag=1;
 prew_flag=0;
 F0_result=BF0NLS(NoisySignal,samplingFreq,plot_flag,prew_flag);
+
 
 
 
