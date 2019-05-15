@@ -2,11 +2,10 @@
 
 A fast pitch tracking algorithm using the harmonic model, based on the paper
 
-Shi L, Nielsen J K, Jensen J R, et al. Bayesian Pitch Tracking Based on the Harmonic Model[J]. 
-IEEE/ACM Transactions on Audio, Speech, and Language Processing, submitted 2018.
+ Shi L, Nielsen J K, Jensen J R, et al. Bayesian Pitch Tracking Based on the Harmonic Model[J]. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2019.
 
 # How to run
-Run run_white_example.m or run_colored_example.m in the example folder in MATLAB
+Run run_white_example.m or run_colored_example.m in MATLAB
 
 # Note
 This fast computation of the likelihood function is based on the fast pitch estimation method proposed in
@@ -15,14 +14,13 @@ Fast fundamental frequency estimation: Making a statistically efficient estimato
 
 Bayesian Model Comparison With the g-Prior. Nielsen, Jesper Kjær; Christensen, Mads Græsbøll; Cemgil, Ali Taylan; Jensen, Søren Holdt. In: IEEE Transactions on Signal Processing, 62 (1), 2014, pp. 225-238.
 
-where the source code is available in 
+where the source code is available in
 https://github.com/jkjaer/fastF0Nls
 
 
-This noise PSD tracker is based on the method proposed in 
+This noise PSD tracker is based on the method proposed in
 
-Gerkmann, T. & Hendriks, R. C. Unbiased MMSE-Based Noise Power Estimation With Low Complexity and Low Tracking Delay
-IEEE Trans Audio, Speech, Language Processing, 2012, 20, 1383-1393
+Gerkmann, T. & Hendriks, R. C. Unbiased MMSE-Based Noise Power Estimation With Low Complexity and Low Tracking Delay, IEEE Trans Audio, Speech, Language Processing, 2012, 20, 1383-1393
 
 where the source code is available in
 http://www.ee.ic.ac.uk/hp/staff/dmb/voicebox/voicebox.html
