@@ -1,4 +1,4 @@
-# Bayesian-Pitch-Tracking-Using-Harmonic-model
+# Bayesian Pitch Tracking Using Harmonic model
 
 A fast pitch tracking algorithm using the harmonic model, based on the paper
 
@@ -7,7 +7,7 @@ A fast pitch tracking algorithm using the harmonic model, based on the paper
 # How to run
 Run run_white_example.m or run_colored_example.m in MATLAB
 
-# Note
+# References
 This fast computation of the likelihood function is based on the fast pitch estimation method proposed in
 
 Fast fundamental frequency estimation: Making a statistically efficient estimator computationally efficient. Nielsen, Jesper Kjær; Jensen, Tobias Lindstrøm; Jensen, Jesper Rindom; Christensen, Mads Græsbøll; Jensen, Søren Holdt. In: Signal Processing, 135, 2017, pp. 188-197.
