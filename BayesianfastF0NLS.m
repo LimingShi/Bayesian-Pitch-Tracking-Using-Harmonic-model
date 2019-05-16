@@ -352,24 +352,3 @@ y=log(sum(sum(exp(x-max_temp))))+max_temp;
 y(inf_ind)=-inf;
 end
 
-
-function y=log_sum_exp_ls(x,dim)
-if nargin ==1
-    dim=1;
-end
-max_temp=max(x,[],dim);
-inf_ind=isinf(max_temp);
-y=log(sum(exp(x-max_temp),dim))+max_temp;
-y(inf_ind)=-inf;
-end
-
-
-function y=log_trapz_exp_ls(x,dim)
-if nargin ==1
-    dim=1;
-end
-max_temp=max(x,[],dim);
-inf_ind=isinf(max_temp);
-y=log(trapz(exp(x-max_temp),dim))+max_temp;
-y(inf_ind)=-inf;
-end

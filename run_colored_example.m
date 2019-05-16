@@ -6,11 +6,11 @@ close all;
 %% generate noisy data
 SNR=0;
 load factoryNoise.mat
-noise_s=resample(factoryNoise,samplingFreq,16000);
-randstart=randi(length(noise_s)-length(cleanspeech)-100);
-noise_seg=noise_s(randstart:randstart+length(cleanspeech)-1);
-noise=addnoise_strict_snr(cleanspeech,noise_seg,SNR);
-NoisySignal=cleanspeech+noise;
+noise=resample(factoryNoise,samplingFreq,16000);
+randstart=randi(length(noise)-length(cleanspeech)-100);
+noise_seg=noise(randstart:randstart+length(cleanspeech)-1);
+scaled_noise=addnoise(cleanspeech,noise_seg,SNR);
+NoisySignal=cleanspeech+scaled_noise;
 %% process the data 
 % the third argument is the pre-whitening flag,
 % when prew_flag=0,  pre-whitening will be disabled, and 

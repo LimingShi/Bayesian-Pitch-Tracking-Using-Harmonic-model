@@ -25,8 +25,9 @@ if nargin<4
 end
 
 %% resample to 16 KHz for the best results
-speechSignal=resample(speechSignal,16000,samplingFreq);
-samplingFreq=16000;
+fs_fine_tuned=16000;
+speechSignal=resample(speechSignal,fs_fine_tuned,samplingFreq);
+samplingFreq=fs_fine_tuned;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % normalization step
 sumE = sqrt(speechSignal'*speechSignal/length(speechSignal));

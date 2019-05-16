@@ -5,8 +5,9 @@ close all;
 [cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);cleanspeech=cleanspeech(:,1);
 %% generate noisy data
 SNR=0;
-noise=addnoise_strict_snr(cleanspeech,randn(size(cleanspeech)),SNR);
-NoisySignal=cleanspeech+noise;
+noise=randn(size(cleanspeech)); % White Gaussian noise
+scaled_noise=addnoise(cleanspeech,noise,SNR);
+NoisySignal=cleanspeech+scaled_noise;
 %% process the data 
 % the third argument is the pre-whitening flag,
 % when prew_flag=0,  pre-whitening will be disabled, and 
