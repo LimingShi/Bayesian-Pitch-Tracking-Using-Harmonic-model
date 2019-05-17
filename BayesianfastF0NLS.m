@@ -318,7 +318,7 @@ classdef BayesianfastF0NLS< handle
 
 
                 if unvoicing_scaled_alpha < log(0.5)
-                    obj.scaled_alpha_buffer2=exp(scaled_alpha-log_sumsum_exp_ls(scaled_alpha));
+                    obj.scaled_alpha_buffer2=exp(scaled_alpha-log(1-exp(unvoicing_scaled_alpha)));
                 else 
 %                     estimatedOrder=nan;
                 end
