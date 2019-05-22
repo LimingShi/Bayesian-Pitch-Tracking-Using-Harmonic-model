@@ -6,15 +6,11 @@ A fast pitch tracking algorithm using the harmonic model.
 Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB
 
 # Examples
-An example under white Gaussian noise:
-
 <p align="center">
 <img src=figures/2222.png>
 </p>
 <center> Figure 1: Pitch estimates under 0 dB white Gaussian noise.</center>
 
-
-An example under white Gaussian noise:
 
 <p align="center">
 <img src=figures/1111.png>
