@@ -9,7 +9,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 An example under white Gaussian noise:
 
 <p align="center">
-<img src="https://github.com/LimingShi/Bayesian-Pitch-Tracking-Using-Harmonic-model/tree/master/figures/whiteGaussian0dB.jpeg">
+<img src=figures/whiteGaussian0dB.jpeg>
 </p>
 
  Figure 1: Pitch estimates from PEFAC, CREPE, YIN, fast NLS and the proposed (BF0NLS), the order estimates of the fast NLS and the proposed, and the voicing probabilities for real speech signals in 0 dB white Gaussian noise (from top to bottom).
