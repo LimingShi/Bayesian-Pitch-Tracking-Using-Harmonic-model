@@ -14,9 +14,9 @@ NoisySignal=cleanspeech+scaled_noise;
 % when prew_flag=1,  pre-whitening will be enabled
 plot_flag=1;
 prew_flag=0;
+tic
 F0_result=BF0NLS(NoisySignal,samplingFreq,plot_flag,prew_flag);
-
-
+toc
 
 
 
