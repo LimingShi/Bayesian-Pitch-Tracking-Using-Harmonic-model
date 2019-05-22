@@ -18,6 +18,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 
 <center>Figure 2: Pitch estimates under 0 dB factory noise (Running time on my laptop is around 9.3 s).</center>
 
+Note that, prewhitening is used for Figure 2.
 
 
 # How to cite
