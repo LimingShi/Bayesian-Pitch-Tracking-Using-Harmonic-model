@@ -35,7 +35,7 @@ where the source code is available in
 https://github.com/jkjaer/fastF0Nls
 
 
-This noise PSD tracker is based on the method proposed in
+This noise PSD tracker used for prewhitening is based on the method proposed in
 
 Gerkmann, T. & Hendriks, R. C. Unbiased MMSE-Based Noise Power Estimation With Low Complexity and Low Tracking Delay, IEEE Trans Audio, Speech, Language Processing, 2012, 20, 1383-1393
 
