@@ -3,7 +3,7 @@
 A fast pitch tracking algorithm using the harmonic model.
 
 Preprint version is available in
-[a link](https://tinyurl.com/y6cl297g)
+[HERE](https://tinyurl.com/y6cl297g)
 
 # How to run
 Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB
