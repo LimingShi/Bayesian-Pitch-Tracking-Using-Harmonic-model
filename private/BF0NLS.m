@@ -5,9 +5,14 @@ function result=BF0NLS(speechSignal,samplingFreq,plot_flag,prew_flag,Par_set)
 % 
 % input:
 % input arguments --> as the names suggested
-% Par_set.segmentTime is the segmentTime in seconds
-% Par_set.segmentShift is the segmentShift in seconds
-% Par_set.f0Bounds is the f0 bounds in Hz
+% plot_flag: 0 when you do not want a plot  (0 in default)
+% prew_flag: 0 when you do not want to prewhiten the signal (0 in default)
+% Par_set:   the parameter set you can set, including the segment time,
+% segment shift and F0 boundaries.
+% 
+% Par_set.segmentTime is the segmentTime in seconds  (25 ms in default)
+% Par_set.segmentShift is the segmentShift in seconds (10 ms in default)
+% Par_set.f0Bounds is the F0 boundaries in Hz ([70 400] Hz in default)
 % 
 % output:
 % result.tt         -->   time vector
