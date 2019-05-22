@@ -11,13 +11,13 @@ An example under white Gaussian noise:
 <p align="center">
 <img src=figures/2222.png>
 </p>
-<center> Figure 1: Pitch estimates under 0 dB white Gaussian noise.<center>
+<center> Figure 1: Pitch estimates under 0 dB white Gaussian noise.</center>
 
 <p align="center">
 <img src=figures/1111.png>
 </p>
 
-<center>Figure 2: Pitch estimates under 0 dB factory noise.<center>
+<center>Figure 2: Pitch estimates under 0 dB factory noise.</center>
 
 
 
