@@ -7,6 +7,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 
 # Examples
 An example for white Gaussian noise
+
 ![ALT text](figures/whiteGaussian0dB.jpeg)
 
  Figure 1: Pitch estimates from PEFAC, CREPE, YIN, fast NLS and the proposed, the order estimates of the fast NLS and the proposed, and the voicing probabilities for real speech signals in 0 dB white Gaussian noise (from top to bottom).
