@@ -9,13 +9,13 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 An example under white Gaussian noise:
 
 <p align="center">
-<img src=figures/whiteCase.jpeg>
+<img src=figures/whiteCase.png>
 
  Figure 1: Pitch estimates under 0 dB white Gaussian noise.
 </p>
 
 <p align="center">
-<img src=figures/nonWhiteCase.jpeg>
+<img src=figures/nonWhiteCase.png>
 
  Figure 1: Pitch estimates under 0 dB factory noise.
 </p>
