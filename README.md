@@ -8,7 +8,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 # Examples
 An example under white Gaussian noise:
 <p align="center">
-![ALT text](figures/whiteGaussian0dB.jpeg)
+![ALT text](figures/whiteGaussian0dB.jpeg?style=centerme)
 </p>
  Figure 1: Pitch estimates from PEFAC, CREPE, YIN, fast NLS and the proposed (BF0NLS), the order estimates of the fast NLS and the proposed, and the voicing probabilities for real speech signals in 0 dB white Gaussian noise (from top to bottom).
 
