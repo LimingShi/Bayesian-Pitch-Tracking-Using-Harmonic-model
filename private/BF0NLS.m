@@ -63,18 +63,18 @@ if isempty(Par_set)
     segmentShift = 0.010; % seconds
     f0Bounds = [70, 400]; % cycles/sample
 else
-    if isfield('segmentTime')
+    if isfield(Par_set,'segmentTime')
         segmentTime = Par_set.segmentTime; %     seconds
     else
         segmentTime = 0.025; %     seconds
     end
-    if isfield('segmentTime')
+    if isfield(Par_set,'segmentShift')
         segmentShift = Par_set.segmentShift; 
     else
         segmentShift = 0.010; % seconds
     end
-    if isfield('segmentTime')
-        f0Bounds = Par_set.f0Bounds/samplingFreq; % cycles/sample
+    if isfield(Par_set,'f0Bounds')
+        f0Bounds = Par_set.f0Bounds; % cycles/sample
     else
         f0Bounds = [70, 400]; % cycles/sample
     end
