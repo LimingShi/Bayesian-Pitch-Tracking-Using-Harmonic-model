@@ -2,7 +2,7 @@
 
 A fast pitch tracking algorithm using the harmonic model.
 
-Preprint version is available in
+The preprint version of the article for this work is available in
 [HERE](https://tinyurl.com/y6cl297g)
 
 # How to run
