@@ -5,6 +5,11 @@ A fast pitch tracking algorithm using the harmonic model.
 # How to run
 Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB
 
+# Examples
+![image](https://github.com/LimingShi/Bayesian-Pitch-Tracking-Using-Harmonic-model/figures/whiteGaussian0dB.pdf)
+
+
+
 # How to cite
  Shi L, Nielsen J K, Jensen J R, et al. Bayesian Pitch Tracking Based on the Harmonic Model[J]. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2019.
 

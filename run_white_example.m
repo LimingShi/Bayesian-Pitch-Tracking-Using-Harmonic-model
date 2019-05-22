@@ -4,7 +4,7 @@ close all;
 %% read speech signals
 [cleanspeech, samplingFreq] = audioread(['CleanSpeech.wav']);cleanspeech=cleanspeech(:,1);
 %% generate noisy data
-SNR=0;
+SNR=inf;
 noise=randn(size(cleanspeech)); % White Gaussian noise
 scaled_noise=addnoise(cleanspeech,noise,SNR);
 NoisySignal=cleanspeech+scaled_noise;
