@@ -12,16 +12,21 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 <p align="center">
 <img src=figures/2222.png>
 </p>
-<center> Figure 1: Pitch estimates under 0 dB white Gaussian noise (Running time on my laptop is around 2.6 s).</center>
+<center> Figure 1: Pitch estimates for speech signals under 0 dB white Gaussian noise (Running time on my laptop is around 2.6 s).</center>
 
 
 <p align="center">
 <img src=figures/1111.png>
 </p>
 
-<center>Figure 2: Pitch estimates under 0 dB factory noise (Running time on my laptop is around 9.3 s).</center>
+<center>Figure 2: Pitch estimates for speech signals under 0 dB factory noise (Running time on my laptop is around 9.3 s, and prewhitening is used).</center>
 
-Note that, prewhitening is used for Figure 2.
+<p align="center">
+<img src=figures/3333.png>
+</p>
+
+<center>Figure 2: Pitch estimates for music signals (vibrato flute sound) under 0 dB white Gaussian noise (Running time on my laptop is around 32.2 s).</center>
+
 
 
 # How to cite

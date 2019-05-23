@@ -155,7 +155,7 @@ if plot_flag==1
     imagesc(timeVector, stftFreqVector, ...
     10*log10(dynamicRangeLimiting(powerSpectrum, 60)));
     axis xy;
-    ylim([0,500])
+    ylim([0,f0Bounds(2)*samplingFreq+100])
     hold on;
     plot(timeVector, result.best_ff, 'r-', 'linewidth',2);
     ylabel('Frequency [Hz]');
