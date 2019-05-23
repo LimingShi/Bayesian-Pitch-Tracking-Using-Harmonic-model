@@ -30,7 +30,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 
 
 # How to cite
- Shi L, Nielsen J K, Jensen J R, et al. Bayesian Pitch Tracking Based on the Harmonic Model[J]. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2019.
+ Shi L, Nielsen J K, Jensen J R, Little M A, Christensen M G. Bayesian Pitch Tracking Based on the Harmonic Model[J]. IEEE/ACM Transactions on Audio, Speech, and Language Processing, submitted, 2019.
 
 # References
 This fast computation of the likelihood function is based on the fast pitch estimation method proposed in
