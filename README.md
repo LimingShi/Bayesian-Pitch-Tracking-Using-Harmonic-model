@@ -25,7 +25,7 @@ Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory
 <img src=figures/3333.png>
 </p>
 
-<center>Figure 2: Pitch estimates for music signals (vibrato flute sound) under 0 dB white Gaussian noise (Running time on my laptop is around 32.2 s).</center>
+<center>Figure 3: Pitch estimates for music signals (vibrato flute sound) under 0 dB white Gaussian noise (Running time on my laptop is around 32.2 s).</center>
 
 
 
