@@ -1,5 +1,4 @@
 function result=BF0NLS(speechSignal,samplingFreq,plot_flag,prew_flag,Par_set)
-
 % -----------------------------------------------------------------------
 % format of the input and output arguments
 % 
@@ -54,7 +53,7 @@ if nargin<5
     Par_set=[];
 end
 
-%% resample to 16 KHz for the best results
+%% resample to 16 KHz for tuned parameters. However, the sampling frequency can be changed.
 fs_fine_tuned=16000;
 speechSignal=resample(speechSignal,fs_fine_tuned,samplingFreq);
 samplingFreq=fs_fine_tuned;
@@ -70,8 +69,13 @@ else
     end
     if isfield(Par_set,'segmentShift')
         segmentShift = Par_set.segmentShift; 
+        % std_pitch --> standard deviation for the pitch for 10 ms frame shift. 
+        % This value shouold be modified if frame shift is shorter or longer, with a lower bound of .5 Hz.
+        std_pitch=max(2/10*segmentShift*1000,0.5);        
     else
         segmentShift = 0.010; % seconds
+        % std_pitch --> standard deviation for the pitch for 10 ms frame shift. 
+        std_pitch=2;  
     end
     if isfield(Par_set,'f0Bounds')
         f0Bounds = Par_set.f0Bounds; % cycles/sample
@@ -100,7 +104,7 @@ else
         maxNoHarmonics = 30;
     end
 end
-f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds,2/samplingFreq,.7);
+f0Estimator = BayesianfastF0NLS(segmentLength, maxNoHarmonics, f0Bounds, std_pitch/samplingFreq,.7);
 speechSignal_padded=[zeros(segmentLength/2,1);speechSignal];
 % do the analysis
 idx = 1:segmentLength;
