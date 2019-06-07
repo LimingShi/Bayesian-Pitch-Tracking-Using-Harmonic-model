@@ -27,9 +27,9 @@ function result=BF0NLS(speechSignal,samplingFreq,plot_flag,prew_flag,Par_set)
 % 
 % Example for for customize Par_set
 % 
-% Par_set.segmentTime = 0.03; 30 ms for each segment
-% Par_set.segmentShift = 0.01; 10 ms for segment shift
-% Par_set.f0Bounds =[70, 400]; pitch is bounded between 70 to 400 Hz
+% Par_set.segmentTime = 0.025; 25 ms for each segment (default value)
+% Par_set.segmentShift = 0.01; 10 ms for segment shift (default value)
+% Par_set.f0Bounds =[70, 400]; pitch is bounded between 70 to 400 Hz (default value)
 % 
 % 
 % Written by Liming Shi, Aalborg 9000, Denmark
@@ -61,6 +61,7 @@ if isempty(Par_set)
     segmentTime = 0.025; %     seconds
     segmentShift = 0.010; % seconds
     f0Bounds = [70, 400]; % cycles/sample
+    std_pitch=2;
 else
     if isfield(Par_set,'segmentTime')
         segmentTime = Par_set.segmentTime; %     seconds
