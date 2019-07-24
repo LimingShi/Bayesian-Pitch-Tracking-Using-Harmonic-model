@@ -46,7 +46,11 @@ classdef BayesianfastF0NLS< handle
         scaled_alpha_buffer2
         unvoicing_scaled_alpha_buffer
         logModelPrior;
+        %% varSpeech is a regularization parameter and it should be chosen according to the input SNR
+        % In high SNR, a larger value leads to better performance from our
+        % experience.
         varSpeech=5e-6;
+        %%
         B
         C
         norml_factor=0;
