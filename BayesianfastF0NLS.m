@@ -46,7 +46,7 @@ classdef BayesianfastF0NLS< handle
         scaled_alpha_buffer2
         unvoicing_scaled_alpha_buffer
         logModelPrior;
-        varSpeech=5e-3;
+        varSpeech=5e-6;
         B
         C
         norml_factor=0;
@@ -273,7 +273,7 @@ classdef BayesianfastF0NLS< handle
                 % parameters, noise variance and g have been integrated
                 % out)
                 costs = obj.computeCostFunctions(x);
-                cod = costs*(1/(x'*x+obj.varSpeech));
+                cod = costs*(1/(x'*x+obj.varSpeech*obj.N));
 %                   cod = costs*(1/(x'*x));
                 [~, pitchLogLikelihood] = ...
                     computePitchLogLikelihood(cod, obj.N, obj.gPriorParam);
