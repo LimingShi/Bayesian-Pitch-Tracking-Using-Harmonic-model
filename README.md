@@ -49,3 +49,8 @@ Gerkmann, T. & Hendriks, R. C. Unbiased MMSE-Based Noise Power Estimation With L
 
 where the source code is available in
 http://www.ee.ic.ac.uk/hp/staff/dmb/voicebox/voicebox.html
+
+# Questions
+If you have any question regarding to the theory and code, or want to get a C++ version, feel free to contact
+
+Liming Shi, Aalborg university, Email: ls@create.aau.dk
