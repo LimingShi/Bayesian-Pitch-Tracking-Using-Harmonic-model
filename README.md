@@ -6,7 +6,9 @@ The preprint version of the article for this work is available in
 [HERE](https://tinyurl.com/y6cl297g)
 
 # How to run
-Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB
+Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB in the BF0NLS_MATLAB folder
+Run main.m in MATLAB in the BF0NLS_realtimeDemo_MATLAB folder
+
 
 # Examples
 <p align="center">
@@ -51,6 +53,6 @@ where the source code is available in
 http://www.ee.ic.ac.uk/hp/staff/dmb/voicebox/voicebox.html
 
 # Questions
-If you have any question regarding to the theory and code, or want to get a C++ version, feel free to contact
+If you have any question regarding to the theory and code, feel free to contact
 
 Liming Shi, Aalborg university, Email: ls@create.aau.dk
