@@ -1,0 +1,14 @@
+Mandatory:
+ Googletest
+ HDF5 dev
+ and FFTW
+
+Googletest:
+  Get and compile googletest from https://github.com/google/googletest
+
+HDF5:
+  Get and install: Using Ubuntu
+     apt-get install libhdf5-dev
+
+FFW3
+apt-get install libfftw3-3 libfftw3-dev

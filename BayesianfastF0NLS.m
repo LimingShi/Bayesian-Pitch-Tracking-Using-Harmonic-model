@@ -276,11 +276,23 @@ classdef BayesianfastF0NLS< handle
                 % over only the fundamental frequency (the linear
                 % parameters, noise variance and g have been integrated
                 % out)
+%                 x=x/norm(x);
                 costs = obj.computeCostFunctions(x);
+                
+%                 for ii=1:size(costs,1)
+%                     regvalue=1e-5;
+%                     tempt=costs(ii,:)/(2*regvalue);
+%                     pitchLogLikelihood(ii,:)=tempt+log(tempt)*(-3/2-ii+1)+...
+%                         log(gammainc(costs(ii,:),3/2+ii-1));
+%                 end
+                
+                
                 cod = costs*(1/(x'*x+obj.varSpeech*obj.N));
-%                   cod = costs*(1/(x'*x));
+% %                  cod = (costs)*(1/(x'*x));
+% %                   cod = costs*(1/(x'*x));
                 [~, pitchLogLikelihood] = ...
                     computePitchLogLikelihood(cod, obj.N, obj.gPriorParam);
+% %                 pitchLogLikelihood=pitchLogLikelihood;
                 null_modellike=1;
                 
                     %% added/modified by Liming Shi (implements the hidden markov chain)

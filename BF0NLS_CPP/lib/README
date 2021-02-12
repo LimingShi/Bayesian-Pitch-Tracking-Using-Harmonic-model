@@ -1,0 +1,30 @@
+Compiles a library of the fast single pitch method
+
+Additional packages:
+  Either MKL or FFTW
+
+FFW3
+apt-get install libfftw3-3 libfftw3-dev
+
+MKL:
+ Download MKL: https://software.intel.com/en-us/mkl
+
+Makefile
+ Set optional MKL
+
+Select one of the following LINK options
+
+  - Use MKL for FFTs and vector operations and a recursive Chebyshev method
+     for computing sinusoidal vectors
+     
+     LINK = -DMKL $(MKL) -DCHEBYSHEV
+     
+  - Use MKL for FFTs and vector operations
+  
+     LINK = -DMKL $(MKL)
+
+  - Use FFTW3 for FFTs and direct for-loop implementation of vector-operations.
+
+     LINK = -lfftw3
+
+with -DREGULARIZE the system is regularized with eps = 1e-8
