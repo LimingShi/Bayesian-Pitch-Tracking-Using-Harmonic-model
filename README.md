@@ -7,6 +7,7 @@ The preprint version of the article for this work is available in
 
 # How to run
 Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB in the BF0NLS_MATLAB folder
+
 Run main.m in MATLAB in the BF0NLS_realtimeDemo_MATLAB folder
 
 
