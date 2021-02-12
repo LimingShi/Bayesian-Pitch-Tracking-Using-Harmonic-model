@@ -6,9 +6,15 @@ The preprint version of the article for this work is available in
 [HERE](https://tinyurl.com/y6cl297g)
 
 # How to run
+Containing MATLAB and CPP code
+
+For the MATLAB code:
+
 Run run_white_example.m (white Gaussian noise) or run_colored_example.m (factory noise) in MATLAB in the BF0NLS_MATLAB folder
 
 Run main.m in MATLAB in the BF0NLS_realtimeDemo_MATLAB folder
+
+
 
 
 # Examples
