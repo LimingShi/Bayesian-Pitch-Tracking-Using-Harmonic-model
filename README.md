@@ -6,7 +6,7 @@ The preprint version of the article for this work is available in
 [HERE](https://tinyurl.com/y6cl297g)
 
 # How to run
-Containing MATLAB and CPP code
+This project contains both the MATLAB and CPP code
 
 For the MATLAB code:
 
