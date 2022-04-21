@@ -2,8 +2,8 @@
 
 A fast pitch tracking algorithm using the harmonic model.
 
-The preprint version of the article for this work is available in
-[HERE](https://tinyurl.com/y6cl297g)
+The article for this work is available in
+[HERE](https://ieeexplore.ieee.org/abstract/document/8771212)
 
 # How to run
 This project contains both the MATLAB and CPP code
