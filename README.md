@@ -3,8 +3,8 @@
 A fast pitch tracking algorithm using the harmonic model.
 
 The article for this work is available in
-[HERE](https://ieeexplore.ieee.org/abstract/document/8771212)
-[FREE preprint](https://www.researchgate.net/publication/334660108_Robust_Bayesian_Pitch_Tracking_Based_on_the_Harmonic_Model)
+[PUBLISHED](https://ieeexplore.ieee.org/abstract/document/8771212),
+[PREPRINT](https://www.researchgate.net/publication/334660108_Robust_Bayesian_Pitch_Tracking_Based_on_the_Harmonic_Model)
 
 # How to run
 This project contains both the MATLAB and CPP code
